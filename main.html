@@ -19,84 +19,95 @@
             <div class="mx-auto">
                 <div class="mb-1 row">
                     <div class="col-6">Current Price</div>
-                    <div class="col-6"><input id="cp" type="text" class="col-sm-5 form-control" placeholder="eg 18123 or 43020"
-                            aria-label="eg 18120 or 43020"></div>
+                    <div class="col-6"><input id="cp" value="18123" type="number" class="col-sm-5 form-control"
+                            placeholder="eg 18123 or 43020" aria-label="eg 18120 or 43020"></div>
                 </div>
                 <div class="mb-1 row">
                     <div class="col-6">StopLoss</div>
-                    <div class="col-6"><input id="sl" type="text" class="col-sm-5 form-control" placeholder="18100 or 42970"
-                            aria-label="18100 or 42970"></div>
+                    <div class="col-6"><input id="sl" value="18103" type="number" class="col-sm-5 form-control"
+                            placeholder="18100 or 42970" aria-label="18100 or 42970"></div>
                 </div>
                 <div class="mb-1 row">
                     <div class="col-6">Target</div>
-                    <div class="col-6"><input id="target" type="text" class="col-sm-5 form-control" placeholder="18200 or 43000"
-                            aria-label="18200 or 43000"></div>
+                    <div class="col-6"><input id="tgt" value="18200" type="number" class="col-sm-5 form-control"
+                            placeholder="18200 or 43000" aria-label="18200 or 43000"></div>
                 </div>
                 <div class="mb-1 row">
                     <div class="col-6">Strike Price</div>
-                    <div class="col-6"><input id="strikePrice" type="text" class="col-sm-5 form-control"
+                    <div class="col-6"><input id="sp" value="18200" type="number" class="col-sm-5 form-control"
                             placeholder="Nifty or Bank Nifty Strike" aria-label="Nifty or Bank Nifty Strike"></div>
                 </div>
 
                 <div class="mb-1 row">
                     <div class="col-6">Delta of Strike Price</div>
-                    <div class="col-6"><input id="delta" type="text" class="col-sm-5 form-control"
+                    <div class="col-6"><input id="delta" value=".5" type="number" class="col-sm-5 form-control"
                             placeholder="0.5" aria-label="less than 1 eg .5"></div>
                 </div>
-                
+
                 <div class="mb-1 row">
                     <div class="col-6">LTP of Strike Price</div>
-                    <div class="col-6"><input id="ltp" type="text" class="col-sm-5 form-control"
+                    <div class="col-6"><input id="ltp" value="100" type="number" class="col-sm-5 form-control"
                             placeholder="100" aria-label="less than 1 eg .5"></div>
                 </div>
                 <div class="mb-1 row">
                     <div class="col-6">Qty</div>
-                    <div class="col-6"><input id="qty" type="text" class="col-sm-5 form-control"
+                    <div class="col-6"><input id="qty" value="50" type="number" class="col-sm-5 form-control"
                             placeholder="50 or 25 per default is 50" aria-label="less than 1 eg .5"></div>
                 </div>
-                <button class="btn btn-primary col-12 mb-2" onclick="showMessage()">Calculate</button>
+                <button class="btn btn-primary col-12 mb-2" onclick="Calculate()">Calculate</button>
                 <div class="mb-1 row">
                     <div class="col-6">StopLoss</div>
-                    <div class="col-6 text-end"><div id="stoploss">90</div></div>
+                    <div class="col-6 text-end">
+                        <div id="stoploss">90</div>
+                    </div>
                 </div>
                 <div class="mb-1 row">
                     <div class="col-6">Target</div>
-                    <div class="col-6 text-end"><div id="targetPrice">140</div></div>
+                    <div class="col-6 text-end">
+                        <div id="target">140</div>
+                    </div>
                 </div>
                 <div class="mb-1 row">
                     <div class="col-6">Loss</div>
-                    <div class="col-6 text-end"><div id="loss" style="color: #f74c08;">-500</div></div>
+                    <div class="col-6 text-end">
+                        <div id="loss" style="color: #f74c08;">-500</div>
+                    </div>
                 </div>
                 <div class="mb-3 row">
                     <div class="col-6">Profit</div>
-                    <div class="col-6 text-end"><div id="profit" style="color: #097c09;">+2000</div></div>
+                    <div class="col-6 text-end">
+                        <div id="profit" style="color: #097c09;">+2000</div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <script>
-        var getValue = (id) => {document.getElementById("id").value};
-        var currentPrice = getValue("cp");
-        var sl = getValue("sl");
-        var target = getValue("target");
-        var strikePrice = getValue("strikePrice");
-        var ltp = getValue("ltp");
-        var qty = getValue("qty");
-        // var stoploss = stoplossgetValue("stoploss");
-        // var targetPrice = getValue("targetPrice");
-        // var loss = getValue("loss");
-        // var profit = getValue("profit");
+        var cp = document.getElementById("cp").value; // currentPrice
+        var sl = document.getElementById("sl").value; //stoploss
+        var tgt = document.getElementById("tgt").value;//target
+        var sp = document.getElementById("sp").value; //strikePrice
+        var ltp = document.getElementById("ltp").value; // lasst traded price of option
+        var qty = document.getElementById("qty").value; // qty want to buy
+        var delta = document.getElementById("delta").value;// delta of strike price from sensibull
 
 
-        function showMessage(){
-            console.log(currentPrice);
+        function Calculate() {
+            console.log(cp);
             console.log(sl);
-            console.log(target);
-            console.log(strikePrice);
-            console.log(ltp);
-            console.log(qty);
-            console.log(stoploss);
-            
+            console.log(tgt);
+
+            stoploss = ltp - Math.abs((cp - sl) * delta);
+            target = ltp + Math.abs((tgt - cp) * delta)
+            loss = stoploss * qty;
+            profit = target * qty;
+
+            document.getElementById("stoploss").innerText = stoploss;
+            document.getElementById("target").innerText = target;
+            document.getElementById("loss").innerText = "-" + loss;
+            document.getElementById("profit").innerText = "+" + profit;
+
+
         }
     </script>
 </body>
