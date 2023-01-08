@@ -1,15 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <title>Trade Calculator</title>
 </head>
-<body>
-    
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+<body>
+    <div class="container">
+        <div class="card mx-auto mt-3">
+            <div class="card-body text-center">
+                <div class="title fs-4">Trade Calculator </div>
+            </div>
+            <div class="mx-auto">
+                <div class="mb-1 row">
+                    <div class="col-6">Current Price</div>
+                    <div class="col-6"><input type="text" class="col-sm-5 form-control" placeholder="eg 18123 or 43020"
+                            aria-label="eg 18120 or 43020"></div>
+                </div>
+                <div class="mb-1 row">
+                    <div class="col-6">StopLoss</div>
+                    <div class="col-6"><input type="text" class="col-sm-5 form-control" placeholder="18100 or 42970"
+                            aria-label="18100 or 42970"></div>
+                </div>
+                <div class="mb-1 row">
+                    <div class="col-6">Target</div>
+                    <div class="col-6"><input type="text" class="col-sm-5 form-control" placeholder="18200 or 43000"
+                            aria-label="18200 or 43000"></div>
+                </div>
+                <div class="mb-1 row">
+                    <div class="col-6">Strike Price</div>
+                    <div class="col-6"><input type="text" class="col-sm-5 form-control"
+                            placeholder="Nifty or Bank Nifty Strike" aria-label="Nifty or Bank Nifty Strike"></div>
+                </div>
+
+                <div class="mb-1 row">
+                    <div class="col-6">Delta of Strike Price</div>
+                    <div class="col-6"><input type="text" class="col-sm-5 form-control"
+                            placeholder="0.5" aria-label="less than 1 eg .5"></div>
+                </div>
+                
+                <div class="mb-1 row">
+                    <div class="col-6">LTP of Strike Price</div>
+                    <div class="col-6"><input type="text" class="col-sm-5 form-control"
+                            placeholder="100" aria-label="less than 1 eg .5"></div>
+                </div>
+                <div class="mb-1 row">
+                    <div class="col-6">Qty</div>
+                    <div class="col-6"><input type="text" class="col-sm-5 form-control"
+                            placeholder="50 or 25 per default is 50" aria-label="less than 1 eg .5"></div>
+                </div>
+                <button class="btn btn-primary col-12 mb-2" onclick="showMessage()">Calculate</button>
+                <div class="mb-1 row">
+                    <div class="col-6">StopLoss</div>
+                    <div class="col-6 text-end"><div id="stoploss">90</div></div>
+                </div>
+                <div class="mb-1 row">
+                    <div class="col-6">Target</div>
+                    <div class="col-6 text-end"><div id="target">140</div></div>
+                </div>
+                <div class="mb-1 row">
+                    <div class="col-6">Loss</div>
+                    <div class="col-6 text-end"><div id="loss" style="color: #f74c08;">-500</div></div>
+                </div>
+                <div class="mb-3 row">
+                    <div class="col-6">Profit</div>
+                    <div class="col-6 text-end"><div id="profit" style="color: #097c09;">+2000</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function showMessage(){
+            console.log("button pressed");
+        }
+    </script>
 </body>
+
 </html>
